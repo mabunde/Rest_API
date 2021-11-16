@@ -7,10 +7,9 @@ public class User {
     private int departmentId;
     private String department;
 
-    public User(String name, String position, int departmentId, String department) {
+    public User(String name, String position,String department) {
         this.name = name;
         this.position = position;
-        this.departmentId = departmentId;
         this.department = department;
     }
 
