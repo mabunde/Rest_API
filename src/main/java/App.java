@@ -20,5 +20,10 @@ public class App {
             int departmentId = Integer.parseInt(request.params("departmentId"));
             return gson.toJson(departmentDao.findById(departmentId));
         });
+        // get all users in a  department
+        get("/departments/:departmentId/users", "application/json", (request, response) -> {
+            int departmentId = Integer.parseInt(request.params("departmentId"));
+            return gson.toJson(departmentDao.allDepartmentEmployees(departmentId));
+        });
     }
 }
