@@ -15,5 +15,10 @@ public class App {
         get("/departments", "application/json", (request, response) -> {
             return gson.toJson(departmentDao.allDepartments());
         });
+        // get department by id
+        get("/departments/:departmentId", "application/json", (request, response) -> {
+            int departmentId = Integer.parseInt(request.params("departmentId"));
+            return gson.toJson(departmentDao.findById(departmentId));
+        });
     }
 }
