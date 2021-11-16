@@ -7,7 +7,7 @@ import models.*;
 public class App {
     public static void main(String[] args) {
         Sql2oDepartmentDao departmentDao = new Sql2oDepartmentDao();
-        Sql2oUserDao employeeDao = new Sql2oUserDao();
+        Sql2oUserDao userDao = new Sql2oUserDao();
         Sql2oNewsDao newsDao = new Sql2oNewsDao();
 
         Gson gson = new Gson();
@@ -24,6 +24,18 @@ public class App {
         get("/departments/:departmentId/users", "application/json", (request, response) -> {
             int departmentId = Integer.parseInt(request.params("departmentId"));
             return gson.toJson(departmentDao.allDepartmentEmployees(departmentId));
+        });
+        // get a specific user in a department
+        get("/departments/:departmentId/users/:userId/details", "application/json", (request, response) -> {
+            int userId = Integer.parseInt(request.queryParams("userId"));
+
+            User userToFind = userDao.findById(userId);
+
+            if (userToFind == null){
+                throw new ApiException(404, String.format("No user with id: \"%s\" exists", request.params("id")));
+            }
+
+            return gson.toJson(userToFind);
         });
     }
 }
