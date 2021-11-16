@@ -28,11 +28,11 @@ public class Sql2oNewsDao implements NewsDao{
 
 
     @Override
-    public void addNewsToDepartment(int deptId, int newsId, int employeeId) {
+    public void addNewsToDepartment(int departmentId, int newsId, int userId) {
         try(Connection conn = DB.sql2o.open()){
-            String sql = "INSERT INTO departments_news (dept_id, news_id, user_id) VALUES (:deptId, :newsId, :userId)";
+            String sql = "INSERT INTO departments_news (department_id, news_id, user_id) VALUES (:departmentId, :newsId, :userId)";
             conn.createQuery(sql)
-                    .addParameter("deptId", deptId)
+                    .addParameter("departmentId", departmentId)
                     .addParameter("newsId", newsId)
                     .addParameter("userId", userId)
                     .executeUpdate();
