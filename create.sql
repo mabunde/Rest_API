@@ -1,12 +1,15 @@
-CREATE DATABASE news_portal
-CREATE TABLE users(id serial PRIMARY KEY,
+CREATE DATABASE news_portal;
+\c news_portal
+CREATE TABLE users(
+id serial PRIMARY KEY,
 name VARCHAR,
 position VARCHAR,
 department VARCHAR
 );
 CREATE TABLE departments(
 id serial PRIMARY KEY,
-name VARCHAR,description VARCHAR,
+name VARCHAR,
+description VARCHAR,
 employeesCount INT
 );
 CREATE TABLE news(
