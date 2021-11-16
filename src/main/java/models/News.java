@@ -11,7 +11,7 @@ public class News {
     public News(String name, String description, String type) {
         this.name = name;
         this.description = description;
-        this.type = "General";
+        this.type = type;
     }
 
     public String getName() {
