@@ -5,12 +5,13 @@ public class User {
     private String name;
     private String position;
     private int departmentId;
+    private String department;
 
-    public User(int id, String name, String position,int departmentId) {
-        this.id = id;
+    public User(String name, String position, int departmentId, String department) {
         this.name = name;
         this.position = position;
         this.departmentId = departmentId;
+        this.department = department;
     }
 
     public int getId() {
@@ -43,6 +44,14 @@ public class User {
 
     public void setDepartmentId(int departmentId) {
         this.departmentId = departmentId;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
 }
