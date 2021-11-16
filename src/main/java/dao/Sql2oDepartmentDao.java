@@ -61,7 +61,7 @@ public class Sql2oDepartmentDao implements DepartmentDao {
     @Override
     public List<User> allDepartmentEmployees(int departmentId) {
         List<User> employees = new ArrayList<>();
-        String joinQuery = "SELECT userid FROM departments_users WHERE deptid=:departmentId";
+        String joinQuery = "SELECT user_id FROM departments_users WHERE dept_id=:departmentId";
         try(Connection conn = DB.sql2o.open()){
             List<Integer> employeeIds = conn.createQuery(joinQuery)
                     .addParameter("departmentId", departmentId)
@@ -84,7 +84,7 @@ public class Sql2oDepartmentDao implements DepartmentDao {
     @Override
     public List<News> allDepartmentNews(int departmentId) {
         List<News> news = new ArrayList<>();
-        String joinQuery = "SELECT newsid FROM departments_news WHERE deptid=:departmentId";
+        String joinQuery = "SELECT news_id FROM departments_news WHERE dept_id=:departmentId";
         try(Connection conn = DB.sql2o.open()){
             List<Integer> newsIds = conn.createQuery(joinQuery)
                     .addParameter("departmentId", departmentId)
@@ -107,7 +107,7 @@ public class Sql2oDepartmentDao implements DepartmentDao {
     @Override
     public void updateEmployeeCount(Department department) {
         try(Connection conn = DB.sql2o.open()){
-            String sql = "UPDATE departments SET employee_count= :employeeCount WHERE id=:id";
+            String sql = "UPDATE departments SET employeecount= :employeeCount WHERE id=:id";
             conn.createQuery(sql)
                     .addParameter("employeeCount", department.getEmployeeCount())
                     .addParameter("id", department.getId())
@@ -132,10 +132,10 @@ public class Sql2oDepartmentDao implements DepartmentDao {
     @Override
     public void deleteEmployeeFromDepartment(Department department, User user) {
         try(Connection conn = DB.sql2o.open()){
-            String sql = "DELETE from departments_users WHERE deptid = :departmentId AND userId = :employeeId";
+            String sql = "DELETE from departments_users WHERE dept_id = :departmentId AND user_id = :useId";
             conn.createQuery(sql)
                     .addParameter("departmentId", department.getId())
-                    .addParameter("employeeId", user.getId())
+                    .addParameter("useId", user.getId())
                     .executeUpdate();
             user.setDepartment("None");
             updateEmployeeCount(department);
@@ -147,7 +147,7 @@ public class Sql2oDepartmentDao implements DepartmentDao {
     @Override
     public void deleteDepartmentNewsById(int departmentId, int newsId) {
         try(Connection conn = DB.sql2o.open()){
-            String sql = "DELETE from departments_news WHERE deptid = :deptId AND newsid = :newsId";
+            String sql = "DELETE from departments_news WHERE dept_id = :deptId AND news_id = :newsId";
             conn.createQuery(sql)
                     .addParameter("deptId", departmentId)
                     .addParameter("newsId", newsId)
