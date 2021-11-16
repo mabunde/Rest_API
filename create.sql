@@ -25,3 +25,4 @@ dept_id INT,
 user_id INT,
 news_id INT
 );
+
